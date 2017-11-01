@@ -32,7 +32,7 @@ repository = "https://github.com/plopgrizzly/afi"
 readme = "README.md"
 description = """
     Aldaron's Format Interface is a library developed by Plop Grizzly for
-    reading and writing different formats.
+    providing memory structures for graphics, audio, video and text.
 """
 keywords = ["afi", "format"]
 categories = ["encoding", "no-std", "parsing", "data-structures", "multimedia"]
@@ -40,13 +40,13 @@ categories = ["encoding", "no-std", "parsing", "data-structures", "multimedia"]
 ################################################################################
 
 exclude = [
-	"examples/*", "CODE_OF_CONDUCT.md", "CONTRIBUTING.md",
-	"ISSUE_TEMPLATE.md", ".gitignore"
+	"examples/*", "CODE_OF_CONDUCT.md", "CONTRIBUTING.md", ".gitignore",
+	"_config.yml", "ISSUE_TEMPLATE.md"
 ]
 
 ################################################################################
 
 [dependencies]
-ami = { path = "../ami" }
+ami = "^0.5"
 
 ################################################################################
