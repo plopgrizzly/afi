@@ -1,4 +1,4 @@
-# Aldaron's Format Interface 0.1.0
+# Aldaron's Format Interface 0.2.0
 Aldaron's Format Interface is a library developed by Plop Grizzly for
 providing memory structures for graphics, audio, video and text.
 
@@ -7,7 +7,7 @@ providing memory structures for graphics, audio, video and text.
 
 ## Features
 **afi**'s current features:
-* Provide structs for different types of multimedia
+* Provide structs for different types of multimedia, and loading errors.
 * Convert RGBA into BGRA
 
 **afi**'s planned features:

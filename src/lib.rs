@@ -15,6 +15,36 @@ extern crate ami;
 
 use ami::Vec;
 
+/// The errors that can be returned if `decode()` fails when loading graphics.
+#[derive(Debug)]
+pub enum GraphicDecodeErr {
+	/// Not correct format. (bad header)
+	IncorrectFormat,
+	/// Dimensions are not numbers
+	BadNum,
+	/// Not yet implemented
+	GrayscaleNYI,
+	/// Not yet implemented
+	IndexedNYI,
+	/// Not yet implemented
+	AGrayscaleNYI,
+	/// Bits NYI
+	BitsNYI,
+}
+
+impl ::core::fmt::Display for GraphicDecodeErr {
+	fn fmt(&self, f: &mut ::core::fmt::Formatter) -> ::core::fmt::Result {
+		write!(f, "Couldn't parse PNG because: {}", match *self {
+			GraphicDecodeErr::IncorrectFormat => "Bad header",
+			GraphicDecodeErr::BadNum => "Dimensions aren't numbers",
+			GraphicDecodeErr::GrayscaleNYI => "NYI: Grayscale",
+			GraphicDecodeErr::IndexedNYI => "NYI: Indexed",
+			GraphicDecodeErr::AGrayscaleNYI => "NYI: AGrayscale",
+			GraphicDecodeErr::BitsNYI => "NYI: bad bits",
+		})
+	}
+}
+
 /// Builder for `Graphic`
 pub struct GraphicBuilder;
 
