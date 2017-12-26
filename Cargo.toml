@@ -17,7 +17,7 @@
 
 [package]
 name = "afi"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Jeron Aldaron Lau <jeron.lau@plopgrizzly.com>"]
 
 ################################################################################
