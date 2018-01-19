@@ -4,8 +4,6 @@
 //
 // src/text.rs
 
-use ami::Vec;
-
 /// Some text.
 pub struct Text {
 	bytes: Vec<u8>

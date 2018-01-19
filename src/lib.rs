@@ -7,13 +7,10 @@
 //! Aldaron's Format Interface is a library developed by Plop Grizzly for
 //! providing memory structures for graphics, audio, video and text.
 
-#![no_std]
 #![warn(missing_docs)]
 #![doc(html_logo_url = "http://plopgrizzly.com/afi/icon.png",
 	html_favicon_url = "http://plopgrizzly.com/afi/icon.ico",
 	html_root_url = "http://plopgrizzly.com/afi/")]
-
-extern crate ami;
 
 mod graphic;
 mod audio;

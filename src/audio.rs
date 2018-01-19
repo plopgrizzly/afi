@@ -4,8 +4,6 @@
 //
 // src/audio.rs
 
-use ami::Vec;
-
 /// A sound or music.
 pub struct Audio {
 	hz: u16,

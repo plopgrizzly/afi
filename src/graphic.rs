@@ -4,8 +4,6 @@
 //
 // src/graphic.rs
 
-use ami::Vec;
-
 /// The errors that can be returned if `decode()` fails when loading graphics.
 #[derive(Debug)]
 pub enum GraphicDecodeErr {
@@ -23,8 +21,8 @@ pub enum GraphicDecodeErr {
 	BitsNYI,
 }
 
-impl ::core::fmt::Display for GraphicDecodeErr {
-	fn fmt(&self, f: &mut ::core::fmt::Formatter) -> ::core::fmt::Result {
+impl ::std::fmt::Display for GraphicDecodeErr {
+	fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
 		write!(f, "Couldn't parse PNG because: {}", match *self {
 			GraphicDecodeErr::IncorrectFormat => "Bad header",
 			GraphicDecodeErr::BadNum => "Dimensions aren't numbers",

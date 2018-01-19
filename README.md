@@ -1,4 +1,4 @@
-# Aldaron's Format Interface 0.2.0
+# Aldaron's Format Interface 0.3.1
 Aldaron's Format Interface is a library developed by Plop Grizzly for
 providing memory structures for graphics, audio, video and text.
 
