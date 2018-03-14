@@ -1,10 +1,9 @@
-// Aldaron's Format Interface
-// Copyright (c) 2017 Plop Grizzly, Jeron Lau <jeron.lau@plopgrizzly.com>
+// text.rs -- Aldaron's Format Interface
+// Copyright (c) 2017-2018  Jeron A. Lau <jeron.lau@plopgrizzly.com>
 // Licensed under the MIT LICENSE
-//
-// src/text.rs
 
 /// Some text.
+#[derive(Clone)]
 pub struct Text {
 	bytes: Vec<u8>
 }

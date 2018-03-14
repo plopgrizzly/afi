@@ -1,8 +1,6 @@
-// Aldaron's Format Interface
-// Copyright (c) 2017 Plop Grizzly, Jeron Lau <jeron.lau@plopgrizzly.com>
+// lib.rs -- Aldaron's Format Interface
+// Copyright (c) 2017-2018  Jeron A. Lau <jeron.lau@plopgrizzly.com>
 // Licensed under the MIT LICENSE
-//
-// src/lib.rs
 
 //! Aldaron's Format Interface is a library developed by Plop Grizzly for
 //! providing memory structures for graphics, audio, video and text.

@@ -1,8 +1,6 @@
-// Aldaron's Format Interface
-// Copyright (c) 2017 Plop Grizzly, Jeron Lau <jeron.lau@plopgrizzly.com>
+// graphic.rs -- Aldaron's Format Interface
+// Copyright (c) 2017-2018  Jeron A. Lau <jeron.lau@plopgrizzly.com>
 // Licensed under the MIT LICENSE
-//
-// src/graphic.rs
 
 /// The errors that can be returned if `decode()` fails when loading graphics.
 #[derive(Debug)]
@@ -61,6 +59,7 @@ impl GraphicBuilder {
 }
 
 /// A graphic (image)
+#[derive(Clone)]
 pub struct Graphic {
 	bgra: bool,
 	w: u32,

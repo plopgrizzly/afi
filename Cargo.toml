@@ -1,51 +1,37 @@
-# Aldaron's Format Interface                                                   #
-# Copyright (c) 2017 Plop Grizzly, Jeron Lau <jeron.lau@plopgrizzly.com>       #
-# Licensed under the MIT LICENSE                                               #
-#                             _        _                                       #
-#                            /@\——————/@\                                      #
-# .———  .                   |   o    o   |     .————      .            .       #
-# |   | |  .———   .———   .——.     []     .——.  |      .——    ———: ———: | .   . #
-# |   | |  |   |  |   |  \   \   <##>   /   /  |      |   |    /    /  | |   | #
-# |———  |  |   |  |   |   |   ¯        ¯   |   |   -- |   |   /    /   |  \ /  #
-# |     |  |   |  |———    |                |   |    | |   |  /    /    |   |   #
-# |     |   ———   |       |                |    ————  |   | :——— :———  |   |   #
-#                 |        \              /                              __/   #
-#                           ¯————————————¯                                     #
-# Cargo.toml                                                                   #
-
-################################################################################
+# Cargo.toml -- Aldaron's Format Interface
+# Copyright (c) 2017-2018  Jeron A. Lau <jeron.lau@plopgrizzly.com>
+# Licensed under the MIT LICENSE
+#                             _        _
+#                            /@\——————/@\
+# .———  .                   |   o    o   |     .————      .            .
+# |   | |  .———   .———   .——.     []     .——.  |      .——    ———: ———: | .   .
+# |   | |  |   |  |   |  \   \   <##>   /   /  |      |   |    /    /  | |   |
+# |———  |  |   |  |   |   |   ¯        ¯   |   |   -- |   |   /    /   |  \ /
+# |     |  |   |  |———    |                |   |    | |   |  /    /    |   |
+# |     |   ———   |       |                |    ————  |   | :——— :———  |   |
+#                 |        \              /                              __/
+#                           ¯————————————¯
 
 [package]
 name = "afi"
-version = "0.3.1"
-authors = ["Jeron Aldaron Lau <jeron.lau@plopgrizzly.com>"]
-
-################################################################################
+version = "0.3.2"
+authors = [
+	"Jeron A. Lau <jeron.lau@plopgrizzly.com>"
+]
 
 license = "MIT"
 documentation = "https://docs.rs/afi"
 homepage = "http://plopgrizzly.com/afi"
 repository = "https://github.com/plopgrizzly/afi"
 
-################################################################################
-
 readme = "README.md"
-description = """
-    Aldaron's Format Interface is a library developed by Plop Grizzly for
-    providing memory structures for graphics, audio, video and text.
-"""
+description = "Memory structures for graphics, audio, video and text"
 keywords = ["afi", "format"]
-categories = ["encoding", "no-std", "parsing", "data-structures", "multimedia"]
-
-################################################################################
+categories = ["encoding", "parsing", "data-structures", "multimedia"]
 
 exclude = [
 	"examples/*", "CODE_OF_CONDUCT.md", "CONTRIBUTING.md", ".gitignore",
 	"_config.yml", "ISSUE_TEMPLATE.md", "icon.ico", "icon.png"
 ]
 
-################################################################################
-
 [dependencies]
-
-################################################################################

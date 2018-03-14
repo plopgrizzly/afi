@@ -1,10 +1,9 @@
-// Aldaron's Format Interface
-// Copyright (c) 2017 Plop Grizzly, Jeron Lau <jeron.lau@plopgrizzly.com>
+// audio.rs -- Aldaron's Format Interface
+// Copyright (c) 2017-2018  Jeron A. Lau <jeron.lau@plopgrizzly.com>
 // Licensed under the MIT LICENSE
-//
-// src/audio.rs
 
 /// A sound or music.
+#[derive(Clone)]
 pub struct Audio {
 	hz: u16,
 	samples: Vec<u16>,
