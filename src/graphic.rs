@@ -94,4 +94,16 @@ impl Graphic {
 	pub fn as_slice(&self) -> (u32, u32, &[u32]) {
 		(self.w, self.h, self.data.as_slice())
 	}
+
+	/// Get the graphic as a slice `(w, h, [r, g, b, a])`
+	pub fn as_bytes(&self) -> (u32, u32, &[u8]) {
+		let slice = self.as_slice();
+		// 
+		let bytes = unsafe {
+			::std::slice::from_raw_parts_mut(slice.2.as_ptr()
+				as *mut u8, slice.2.len() * 4)
+		};
+
+		(slice.0, slice.1, bytes)
+	}
 }
