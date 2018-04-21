@@ -107,3 +107,9 @@ impl Graphic {
 		(slice.0, slice.1, bytes)
 	}
 }
+
+impl AsRef<Graphic> for Graphic {
+	fn as_ref(&self) -> &Graphic {
+		self
+	}
+}

@@ -1,4 +1,4 @@
-# Aldaron's Format Interface 0.4
+# Aldaron's Format Interface 0.5
 
 [Aldaron's Format Interface](http://plopgrizzly.com/afi) is a library
 developed by [Plop Grizzly](http://plopgrizzly.com).  It provides memory
