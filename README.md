@@ -1,26 +1,26 @@
-# Aldaron's Format Interface 0.5
+# [Aldaron's Format Interface](https://crates.io/crates/afi)
+This crate provides APIs for audio and video (buffers, encoders/decoders)
+Encoder/decoder crates can depend on this crate.  Here's a list of crates
+that do:
 
-[Aldaron's Format Interface](http://plopgrizzly.com/afi) is a library
-developed by [Plop Grizzly](http://plopgrizzly.com).  It provides memory
-structures for graphics, audio, video and text.
-
-[Cargo](https://crates.io/crates/afi) /
-[Documentation](https://docs.rs/afi)
+* [aci_png](https://crates.io/crates/aci_png) - Encode/Decode png & apng
+* [aci_ppm](https://crates.io/crates/aci_ppm) - Encode/Decode pnm & mmd
 
 ## Features
-**afi**'s current features:
-* Provide structs for different types of multimedia, and loading errors.
-* Convert RGBA into BGRA
+**afi**'s features:
+* Video & Audio Buffer Structs.
+* Convert between different color formats including YCbCr.
+* Traits for realtime encoders and decoders.
 
-**afi**'s planned features:
-* Video Suppport
+## [Contributing](http://plopgrizzly.com/contributing/en#contributing)
 
-## Roadmap
-* Implement all planned features
-* Have all aci crates for structures in this crate have no more planned features.
+## Roadmap to 1.0 (Future Features)
+* Make sure that functionality is complete.
+* Most encoder / decoder crates should be almost ready for 1.0.0 release.
 * Publish 1.0.0
 
-# Contributing
-If you'd like to help implement functions for unsupported platforms, fix bugs,
-improve the API or improve the Documentation, then contact me at
-jeron.lau@plopgrizzly.com. I'll appreciate any help.
+## Change Log
+### 0.6
+* Replaced `Graphic` with 
+
+## Developed by [Plop Grizzly](http://plopgrizzly.com)

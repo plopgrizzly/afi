@@ -1,28 +1,98 @@
-// audio.rs -- Aldaron's Format Interface
-// Copyright (c) 2017-2018  Jeron A. Lau <jeron.lau@plopgrizzly.com>
-// Licensed under the MIT LICENSE
+// "afi" - Aldaron's Format Interface
+//
+// Copyright Jeron A. Lau 2017-2018.
+// Distributed under the Boost Software License, Version 1.0.  (See accompanying
+// file LICENSE or copy at https://www.boost.org/LICENSE_1_0.txt)
 
-/// A sound or music.
-#[derive(Clone)]
+use AFrame;
+use std::collections::VecDeque;
+
+/// Mono, Stereo or Surround.
+pub enum AudioChannels {
+	/// Mono = 1 channel (front center)
+	Mono = 1,
+	/// Stereo = 2 channels (front left, front right)
+	Stereo = 2,
+	/// Surround = 5 channels (front left, front right, front center,
+	/// back left, back right)
+	Surround = 5,
+}
+
+pub use AudioChannels::*;
+
+impl Default for AudioChannels {
+	fn default() -> AudioChannels { Stereo }
+}
+
+/// An Audio Buffer (48kHz/48,000hz).
 pub struct Audio {
-	hz: u16,
-	samples: Vec<u16>,
+	/// Title
+	pub title: String,
+	/// Artist / Author
+	pub artist: String,
+	/// Album Artist
+	pub album_artist: String,
+	/// Album
+	pub album: String,
+	/// CD
+	pub cd: String,
+	/// Release Date / Release Year
+	pub release: String,
+	/// Track #
+	pub track_number: String,
+	/// Track Count
+	pub track_count: String,
+	/// Genre
+	pub genre: String,
+	/// Comment
+	pub comment: String,
+	/// Composer
+	pub composer: String,
+	/// Original artist
+	pub orig_artist: String,
+	/// Copyright / License
+	pub copyright: String,
+	/// Artist Website / URL
+	pub url: String,
+	/// Encoded By
+	pub encoded_by: String,
+	/// The actual audio.
+	frames: VecDeque<AFrame>,
+	/// The total number of frames in the audio.
+	n_frames: u32,
 }
 
 impl Audio {
-	/// Create a new `Audio` from samples.
-	pub fn new(hz: u16, samples: Vec<u16>) -> Audio {
-		Audio { hz, samples }
+	/// Create a new `Audio`.
+	pub fn new(n_frames: u32) -> Audio {
+		Audio {
+			n_frames,
+			frames: VecDeque::new(),
+			title: String::new(),
+			artist: String::new(),
+			album_artist: String::new(),
+			album: String::new(),
+			cd: String::new(),
+			release: String::new(),
+			track_number: String::new(),
+			track_count: String::new(),
+			genre: String::new(),
+			comment: String::new(),
+			composer: String::new(),
+			orig_artist: String::new(),
+			copyright: String::new(),
+			url: String::new(),
+			encoded_by: String::new(),
+		}
 	}
 
-	/// Get a sample at a specific index.
-	pub fn sample(&self, index: usize) -> u16 {
-		self.samples[index]
+	/// Returns audio for the next frame on the Queue.
+	pub fn pop(&mut self) -> Option<AFrame> {
+		Some(self.frames.pop_front()?)
 	}
 
-	/// Get an index for a specific point in time since the beginning of the
-	/// sound.
-	pub fn index(&self, seconds: f32) -> usize {
-		(seconds / (self.hz as f32)) as usize
+	/// Return the number of frames in the audio.
+	pub fn frames(&self) -> u32 {
+		self.n_frames
 	}
 }
