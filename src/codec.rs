@@ -22,6 +22,22 @@ impl Index {
 	}
 }
 
+impl VFrame {
+	/// Get RGBA from color format and index.
+	pub fn sample_rgba(&self, format: ColorChannels, index: usize)
+		-> [u8; 4]
+	{
+		let mut rgba = [255u8; 4];
+		let channels = format.n_channels();
+
+		for i in 0..channels {
+			rgba[i] = self.0[index * channels + i];
+		}
+
+		rgba
+	}
+}
+
 /// A trait for implementing encoding video (use only with non-audio formats).
 pub trait EncoderV where Self: Sized {
 	/// Create a new encoder for this video.
@@ -64,7 +80,7 @@ pub trait Decoder<T> where Self: Sized {
 	fn run(&mut self, audio: &mut Option<Audio>, video: &mut Option<Video>)
 		-> Option<bool>;
 	/// Get the frame number (24 frames per second).
-	fn get(&self) -> u32;
+	fn get(&self) -> Index;
 	/// Set the frame number to seek forward or backwards.
-	fn set(&mut self) -> u32;
+	fn set(&mut self, index: Index);
 }

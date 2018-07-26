@@ -103,6 +103,11 @@ impl ColorChannels {
 			}
 		}
 	}
+
+	/// Return the number of channels.
+	pub fn n_channels(self) -> usize {
+		(self as u8 % 5) as usize
+	}
 }
 
 /// A Video Buffer (24fps).
@@ -149,7 +154,7 @@ impl Video {
 
 	/// Return the number of channels.
 	pub fn n_channels(&self) -> usize {
-		(self.format as u8 % 5) as usize
+		self.format.n_channels()
 	}
 
 	/// Return the total number of frames in the video.

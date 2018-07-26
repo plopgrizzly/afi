@@ -1,10 +1,9 @@
 # [Aldaron's Format Interface](https://crates.io/crates/afi)
 This crate provides APIs for audio and video (buffers, encoders/decoders)
-Encoder/decoder crates can depend on this crate.  Here's a list of crates
-that do:
+Encoder/decoder crates can depend on this crate.  Here's a list of codec crates:
 
 * [aci_png](https://crates.io/crates/aci_png) - Encode/Decode png & apng
-* [aci_ppm](https://crates.io/crates/aci_ppm) - Encode/Decode pnm & mmd
+* [aci_ppm](https://crates.io/crates/aci_ppm) - Encode/Decode ppm & pnm
 
 ## Features
 **afi**'s features:
@@ -20,7 +19,11 @@ that do:
 * Publish 1.0.0
 
 ## Change Log
-### 0.6
-* Replaced `Graphic` with 
+### 0.7
+* Replaced `Graphic` with `Video`.
+* Added `Encoder*` and `Decoder` Traits.
+* Added `AFrame` and `VFrame`.
+* Added `AudioChannels` and `ColorChannels` along with conversion functions.
+* Version now matches with codec crates.
 
 ## Developed by [Plop Grizzly](http://plopgrizzly.com)

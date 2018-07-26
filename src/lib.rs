@@ -10,7 +10,7 @@
 //! that do:
 //!
 //! * [aci_png](https://crates.io/crates/aci_png) - Encode/Decode png & apng
-//! * [aci_ppm](https://crates.io/crates/aci_ppm) - Encode/Decode pnm & mmd
+//! * [aci_ppm](https://crates.io/crates/aci_ppm) - Encode/Decode ppm & pnm
 
 #![warn(missing_docs)]
 #![doc(html_logo_url = "http://plopgrizzly.com/afi/icon.png",
