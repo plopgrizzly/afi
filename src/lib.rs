@@ -20,7 +20,9 @@
 mod video;
 mod audio;
 mod codec;
+mod path_op;
 
 pub use video::*;
 pub use audio::*;
 pub use codec::*;
+pub use path_op::*;

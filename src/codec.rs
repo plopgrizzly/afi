@@ -10,7 +10,7 @@ use ColorChannels;
 
 /// Index for a frame.
 #[derive(Copy, Clone)] pub struct Index(pub u32);
-/// A Video Frame (1/24 of a second)
+/// A Video Frame
 #[derive(Clone)] pub struct VFrame(pub Vec<u8>);
 /// An audio frame (2000 samples = 1/24 of a second)
 #[derive(Clone)] pub struct AFrame(pub [i16; 2000]);
@@ -24,9 +24,7 @@ impl Index {
 
 impl VFrame {
 	/// Get RGBA from color format and index.
-	pub fn sample_rgba(&self, format: ColorChannels, index: usize)
-		-> [u8; 4]
-	{
+	pub fn get_rgba(&self, format: ColorChannels, index: usize) -> [u8; 4] {
 		let mut rgba = [255u8; 4];
 		let channels = format.n_channels();
 
@@ -35,6 +33,17 @@ impl VFrame {
 		}
 
 		rgba
+	}
+
+	/// Set RGBA for color format and index.
+	pub fn set_rgba(&mut self, format: ColorChannels, index: usize,
+		rgba: [u8; 4])
+	{
+		let channels = format.n_channels();
+
+		for i in 0..channels {
+			self.0[index * channels + i] = rgba[i];
+		}
 	}
 }
 
