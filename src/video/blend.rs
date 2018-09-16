@@ -187,6 +187,20 @@ impl LHsva {
 
 /// Put sRGBA src color over sRGBA dst color in the linear HSVA colorspace.
 pub fn over(src: [u8; 4], dst: [u8; 4]) -> [u8; 4] {
+	// OPTIMIZATIONS
+
+	// If dst alpha is zero, then src.
+	if dst[3] == 0 {
+		return src;
+	}
+
+	// If src alpha is zero, then dst.
+	if src[3] == 0 {
+		return dst;
+	}
+
+	// OVER BLENDING ALGORITHM
+
 	let mut src = LHsva::new(src);
 	let mut dst = LHsva::new(dst);
 
