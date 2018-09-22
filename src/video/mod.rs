@@ -283,6 +283,7 @@ impl ColorChannels {
 	}
 
 	/// Return the number of channels.
+	#[inline(always)]
 	pub fn n_channels(self) -> usize {
 		(self as u8 % 5) as usize
 	}

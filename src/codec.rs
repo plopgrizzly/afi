@@ -23,7 +23,37 @@ impl Index {
 }
 
 impl VFrame {
-	/// Get RGBA from color format and index.
+	/// Get color from index.
+	#[inline(always)]
+	pub fn get(&self, mut index: usize) -> [u8; 4] {
+		index *= 4;
+		[
+			self.0[index + 0],
+			self.0[index + 1],
+			self.0[index + 2],
+			self.0[index + 3],
+		]
+	}
+
+	/// Set color with index.
+	#[inline(always)]
+	pub fn set(&mut self, mut index: usize, rgba: [u8; 4]) {
+		index *= 4;
+		self.0[index + 0] = rgba[0];
+		self.0[index + 1] = rgba[1];
+		self.0[index + 2] = rgba[2];
+		self.0[index + 3] = rgba[3];
+	}
+
+	/// Clear the VFrame.
+	#[inline(always)]
+	pub fn clear(&mut self) {
+		for i in &mut self.0 {
+			*i = 0;
+		}
+	}
+
+/*	/// Get RGBA from color format and index.
 	pub fn get_rgba(&self, format: ColorChannels, index: usize) -> [u8; 4] {
 		let mut rgba = [255u8; 4];
 		let channels = format.n_channels();
@@ -33,9 +63,9 @@ impl VFrame {
 		}
 
 		rgba
-	}
+	}*/
 
-	/// Set RGBA for color format and index.
+/*	/// Set RGBA for color format and index.
 	pub fn set_rgba(&mut self, format: ColorChannels, index: usize,
 		rgba: [u8; 4])
 	{
@@ -44,7 +74,7 @@ impl VFrame {
 		for i in 0..channels {
 			self.0[index * channels + i] = rgba[i];
 		}
-	}
+	}*/
 }
 
 /// A trait for implementing encoding video (use only with non-audio formats).
