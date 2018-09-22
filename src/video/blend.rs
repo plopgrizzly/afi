@@ -23,7 +23,7 @@ fn linear_to_s(linear: f32) -> f32 {
 
 impl LHsva {
 	/// Create new Linear HSV from sRGBA.
-	fn new(rgb: [u8; 4]) -> LHsva {
+	fn new(rgb: &[u8]) -> LHsva {
 		// u8 S to f32 Linear Look Up Table
 		const STOLINLUT: [f32; 256] = [
 			0.0, 0.000303527, 0.000607054, 0.000910581,
@@ -186,28 +186,29 @@ impl LHsva {
 }
 
 /// Put sRGBA src color over sRGBA dst color in the linear HSVA colorspace.
-pub fn over(src: [u8; 4], dst: [u8; 4]) -> [u8; 4] {
+pub fn over(src: [u8; 4], dst: &mut [u8]) {
 	// OPTIMIZATIONS
 
 	// If dst alpha is zero, then src.
 	if dst[3] == 0 {
-		return src;
+		dst.copy_from_slice(&src);
+		return;
 	}
 
 	// If src alpha is zero, then dst.
 	if src[3] == 0 {
-		return dst;
+		return;
 	}
 
 	// OVER BLENDING ALGORITHM
 
-	let mut src = LHsva::new(src);
-	let mut dst = LHsva::new(dst);
+	let mut src = LHsva::new(&src);
+	let mut dst2 = LHsva::new(dst);
 
 	let src_hue_angle = src.0 * (::std::f32::consts::PI / 3.0);
 	let (mut src_x, mut src_y) = src_hue_angle.sin_cos();
 
-	let dst_hue_angle = dst.0 * (::std::f32::consts::PI / 3.0);
+	let dst_hue_angle = dst2.0 * (::std::f32::consts::PI / 3.0);
 	let (mut dst_x, mut dst_y) = dst_hue_angle.sin_cos();
 
 	// Premultiply alpha
@@ -215,28 +216,29 @@ pub fn over(src: [u8; 4], dst: [u8; 4]) -> [u8; 4] {
 	src_y *= src.3;
 	src.1 *= src.3;
 	src.2 *= src.3;
-	dst_x *= dst.3;
-	dst_y *= dst.3;
-	dst.1 *= dst.3;
-	dst.2 *= dst.3;
+	dst_x *= dst2.3;
+	dst_y *= dst2.3;
+	dst2.1 *= dst2.3;
+	dst2.2 *= dst2.3;
 	// Calculate the 3 color channels (sat, val, alpha), and HUE XY.
 	dst_x = src_x + dst_x * (1.0 - src.3);
 	dst_y = src_y + dst_y * (1.0 - src.3);
-	dst.1 = src.1 + dst.1 * (1.0 - src.3);
-	dst.2 = src.2 + dst.2 * (1.0 - src.3);
-	dst.3 = src.3 + dst.3 * (1.0 - src.3);
+	dst2.1 = src.1 + dst2.1 * (1.0 - src.3);
+	dst2.2 = src.2 + dst2.2 * (1.0 - src.3);
+	dst2.3 = src.3 + dst2.3 * (1.0 - src.3);
 	// Bring the color value & saturation up (Postdivide alpha)
-	dst.1 /= dst.3;
-	dst.2 /= dst.3;
+	dst2.1 /= dst2.3;
+	dst2.2 /= dst2.3;
 	// Turn XY back to HUE
-	dst.0 = dst_y.atan2(dst_x) * (3.0 / ::std::f32::consts::PI);
+	dst2.0 = dst_y.atan2(dst_x) * (3.0 / ::std::f32::consts::PI);
 
-	dst.to_srgba()
+	dst.copy_from_slice(&dst2.to_srgba());
+	return;
 }
 
 /// Blend multiple sRGBA colors in the linear HSVA colorspace.
 pub fn blend(colors: &[([u8; 4], f32)]) -> [u8; 4] {
-	let mut out = LHsva::new(colors[0].0);
+	let mut out = LHsva::new(&colors[0].0);
 	let hue_angle = out.0 * (::std::f32::consts::PI / 3.0);
 	let (mut x, mut y) = hue_angle.sin_cos();
 	let mut div = colors[0].1;
@@ -250,7 +252,7 @@ pub fn blend(colors: &[([u8; 4], f32)]) -> [u8; 4] {
 	out.3 *= alpha * colors[0].1;
 
 	for i in colors.iter() {
-		let mut new = LHsva::new(i.0);
+		let mut new = LHsva::new(&i.0);
 		let hue_angle = new.0 * (::std::f32::consts::PI / 3.0);
 		let (mut new_x, mut new_y) = hue_angle.sin_cos();
 		div += i.1;
