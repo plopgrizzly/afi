@@ -185,23 +185,7 @@ impl LHsva {
 	}
 }
 
-/// Put sRGBA src color over sRGBA dst color in the linear HSVA colorspace.
-pub fn over(src: [u8; 4], dst: &mut [u8]) {
-	// OPTIMIZATIONS
-
-	// If dst alpha is zero, then src.
-	if dst[3] == 0 {
-		dst.copy_from_slice(&src);
-		return;
-	}
-
-	// If src alpha is zero, then dst.
-	if src[3] == 0 {
-		return;
-	}
-
-	// OVER BLENDING ALGORITHM
-
+fn over_blend(src: [u8; 4], dst: &mut [u8]) {
 	let mut src = LHsva::new(&src);
 	let mut dst2 = LHsva::new(dst);
 
@@ -233,7 +217,19 @@ pub fn over(src: [u8; 4], dst: &mut [u8]) {
 	dst2.0 = dst_y.atan2(dst_x) * (3.0 / ::std::f32::consts::PI);
 
 	dst.copy_from_slice(&dst2.to_srgba());
-	return;
+}
+
+/// Put sRGBA src color over sRGBA dst color in the linear HSVA colorspace.
+#[inline(always)]
+pub fn over(src: [u8; 4], dst: &mut [u8]) {
+	// OPTIMIZATIONS
+
+	// If dst alpha is zero, then src.
+	if dst[3] == 0 {
+		unsafe { ::std::ptr::copy_nonoverlapping(src.as_ptr(), dst.as_mut_ptr(), 4) }
+	} else if src[3] != 0 { // If src alpha isn't zero, then change dst.
+		over_blend(src, dst);
+	}
 }
 
 /// Blend multiple sRGBA colors in the linear HSVA colorspace.
