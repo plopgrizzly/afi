@@ -16,9 +16,9 @@
 
 [package]
 name = "afi"
-version = "0.7.0"
+version = "0.8.0-pre0"
 authors = [
-	"Jeron A. Lau <jeron.lau@plopgrizzly.com>",
+	"Jeron Lau <jeron.lau@plopgrizzly.com>",
 ]
 license = "BSL-1.0"
 documentation = "https://docs.rs/afi"
