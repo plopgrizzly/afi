@@ -1,18 +1,15 @@
-# "afi" - Aldaron's Format Interface
-#                             _        _
-#                            /@\——————/@\
-# .———  .                   |   o    o   |     .————      .            .
-# |   | |  .———   .———   .——.     []     .——.  |      .——    ———: ———: | .   .
-# |   | |  |   |  |   |  \   \   <##>   /   /  |      |   |    /    /  | |   |
-# |———  |  |   |  |   |   |   ¯        ¯   |   |   -- |   |   /    /   |  \ /
-# |     |  |   |  |———    |                |   |    | |   |  /    /    |   |
-# |     |   ———   |       |                |    ————  |   | :——— :———  |   |
-#                 |        \              /                              __/
-#                           ¯————————————¯
-#
-# Copyright Jeron A. Lau 2017-2018.
-# Distributed under the Boost Software License, Version 1.0.  (See accompanying
-# file LICENSE or copy at https://www.boost.org/LICENSE_1_0.txt)
+# Copyright Jeron Lau 2017 - 2018.
+# Dual-licensed under either the MIT License or the Boost Software License, Version 1.0.
+# (See accompanying file LICENSE_1_0.txt or copy at https://www.boost.org/LICENSE_1_0.txt)
+
+# XXXX  X                    /5\——————/5\       XXXX      X           X
+# X   X X   XXX   XXXX      |   0    0   |     X      XXX   XXXX XXXX X X   X
+# X   X X  X   X  X   X  /"\|     <>     |/"\  X      X   X    X    X X X   X
+# XXXX  X  X   X  X   X  \  \\_  ====  _//  /  X   XX X   X   X    X  X  X X
+# X     X  X   X  XXXX    \_              _/   X    X X   X  X    X   X   X
+# X     X   XXX   X       / \            / \    XXXX  X   X XXXX XXXX X   X
+#                 X       \                /                            XX
+#                          --____________--
 
 [package]
 name = "afi"
@@ -20,7 +17,7 @@ version = "0.8.0-pre0"
 authors = [
 	"Jeron Lau <jeron.lau@plopgrizzly.com>",
 ]
-license = "BSL-1.0"
+license = "MIT / BSL-1.0"
 documentation = "https://docs.rs/afi"
 homepage = "https://gitlab.com/plopgrizzly/multimedia"
 repository = "https://gitlab.com/plopgrizzly/multimedia/afi"
