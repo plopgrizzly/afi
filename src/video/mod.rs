@@ -163,6 +163,12 @@ pub enum ColorChannels {
 
     /// YCbCr color format, 3 channels
     YCbCr = 3u8 + 25u8,
+
+    /// YUV ITU-R color format, 3 channels
+    YuvItur = 3u8 + 30u8,
+
+    /// YUV NTSC color format, 3 channels
+    YuvNtsc = 3u8 + 35u8,
 }
 
 impl Default for ColorChannels {
@@ -228,6 +234,21 @@ impl ColorChannels {
                 let cr = 128.0 + (0.5 * r) - (0.418688 * g) - (0.081312 * b);
                 [y as u8, cb as u8, cr as u8, 255]
             }
+            // From https://en.wikipedia.org/wiki/YUV#Y%E2%80%B2UV444_to_RGB888_conversion
+            YuvItur => {
+                let [r, g, b] = [r as f64, g as f64, b as f64];
+                let y = (0.299 * r) + (0.587 * g) + (0.114 * b);
+                let cb = (-0.169 * r) - (0.331 * g) + (0.499 * b) + 128.0;
+                let cr = (0.499 * r) - (0.418 * g) - (0.0813 * b) + 128.0;
+                [y as u8, cb as u8, cr as u8, 255u8]
+            }
+            YuvNtsc => {
+                let [r, g, b] = [r as i32, g as i32, b as i32];
+                let y = (((66 * r) + (129 * g) + (25 * b) + 128) >> 8) + 16;
+                let cb = (((-38 * r) + (-74 * g) + (112 * b) + 128) >> 8) + 128;
+                let cr = (((112 * r) + (-94 * g) + (-18 * b) + 128) >> 8) + 128;
+                [y as u8, cb as u8, cr as u8, 255u8]
+            }
         }
     }
 
@@ -257,6 +278,25 @@ impl ColorChannels {
                 let g = y - 0.344136 * (cb - 128.0) - 0.714136 * (cr - 128.0);
                 let b = y + 1.772 * (cb - 128.0);
                 [r as u8, g as u8, b as u8, 255]
+            }
+            // From https://en.wikipedia.org/wiki/YUV#Y%E2%80%B2UV444_to_RGB888_conversion
+            YuvItur => {
+                let [y, cb, cr] = [r, g - 128, b - 128];
+                let r = y + cr + (cr >> 2) + (cr >> 3) + (cr >> 5);
+                let g = y
+                    - ((cb >> 2) + (cb >> 4) + (cb >> 5))
+                    - ((cr >> 1) + (cr >> 3) + (cr >> 4) + (cr >> 5));
+                let b = y + cb + (cb >> 1) + (cb >> 2) + (cb >> 6);
+                [r, g, b, 255u8]
+            }
+            YuvNtsc => {
+                let [c, d, e] = [r as i32 - 16, g as i32 - 128, b as i32 - 128];
+                let r = (((298 * c) + (409 * e) + 128) >> 8).min(255).max(0);
+                let g = (((298 * c) + (-100 * d) + (-208 * e) + 128) >> 8)
+                    .min(255)
+                    .max(0);
+                let b = (((298 * c) + (516 * d) + 128) >> 8).min(255).max(0);
+                [r as u8, g as u8, b as u8, 255u8]
             }
         }
     }

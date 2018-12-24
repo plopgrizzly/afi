@@ -55,27 +55,27 @@ impl VFrame {
     }
 
     /*	/// Get RGBA from color format and index.
-	pub fn get_rgba(&self, format: ColorChannels, index: usize) -> [u8; 4] {
-		let mut rgba = [255u8; 4];
-		let channels = format.n_channels();
+    pub fn get_rgba(&self, format: ColorChannels, index: usize) -> [u8; 4] {
+        let mut rgba = [255u8; 4];
+        let channels = format.n_channels();
 
-		for i in 0..channels {
-			rgba[i] = self.0[index * channels + i];
-		}
+        for i in 0..channels {
+            rgba[i] = self.0[index * channels + i];
+        }
 
-		rgba
-	}*/
+        rgba
+    }*/
 
     /*	/// Set RGBA for color format and index.
-	pub fn set_rgba(&mut self, format: ColorChannels, index: usize,
-		rgba: [u8; 4])
-	{
-		let channels = format.n_channels();
+    pub fn set_rgba(&mut self, format: ColorChannels, index: usize,
+        rgba: [u8; 4])
+    {
+        let channels = format.n_channels();
 
-		for i in 0..channels {
-			self.0[index * channels + i] = rgba[i];
-		}
-	}*/
+        for i in 0..channels {
+            self.0[index * channels + i] = rgba[i];
+        }
+    }*/
 }
 
 /// A trait for implementing encoding video (use only with non-audio formats).
